@@ -7,4 +7,6 @@
     <string name="edit_profile_city">Ciudad</string>
     <string name="edit_profile_delete_account">Eliminar cuenta</string>
     <string name="num_de_participantes">Número de Participantes (Min %d, Máx %d)</string>
+    <string name="maps_api_key">${BuildConfig.MAPS_API_KEY}</string>
+
 </resources>
