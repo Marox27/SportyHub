@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="edit_profile_email">Email</string>
+    <string name="edit_profile_name">Nombre</string>
+    <string name="edit_profile_password">Contraseña</string>
+    <string name="edit_profile_phone_number">Teléfono</string>
+    <string name="edit_profile_city">Ciudad</string>
+    <string name="edit_profile_delete_account">Eliminar cuenta</string>
+    <string name="num_de_participantes">Número de Participantes (Min %d, Máx %d)</string>
+</resources>

@@ -1,0 +1,26 @@
+<!-- item_participante.xml -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@drawable/layout_border"
+    android:padding="8dp">
+
+    <ImageView
+        android:id="@+id/imageViewAvatarParticipante"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/activities"
+        android:scaleType="centerCrop"
+        android:layout_marginEnd="16dp" />
+
+    <TextView
+        android:id="@+id/textViewNombreParticipante"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nombre del Participante"
+        android:layout_gravity="center_vertical|start"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+</LinearLayout>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- fragment_notificaciones.xml -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/tvNotificacionesTitle"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:text="Notificaciones"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:background="@color/mainOrange"
+        android:padding="20dp" />
+
+    <ImageButton
+        android:id="@+id/imMarcarTodasLeidas"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/black"
+        android:background="@drawable/more_vert"
+        android:contentDescription="Opciones" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tvNotificacionesTitle">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewNotificaciones"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"/>
+    </ScrollView>
+
+</RelativeLayout>

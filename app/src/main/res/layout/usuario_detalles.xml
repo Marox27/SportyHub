@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Equipo.EquipoDetails"
+    >
+
+    <LinearLayout
+        android:id="@+id/llUserDetails"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingTop="8dp"
+        android:paddingHorizontal="10dp"
+        >
+
+        <ImageView
+            android:id="@+id/ivUserPfp"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_gravity="center_horizontal"
+            android:scaleType="centerCrop"
+            android:src="@drawable/team" />
+
+        <TextView
+            android:id="@+id/textViewUserNickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:text="Nickname PlaceHolder"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginTop="8dp"
+
+            android:text="Datos del usuario:"
+            android:textSize="14sp"
+            android:textStyle="bold"/>
+
+        <!-- Información Básica sobre el usuario -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/layout_border"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="10dp">
+
+            <!--TextViews para el Nombre del usuario-->
+            <TextView
+                android:id="@+id/textViewNombreUsuario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="2dp"
+                android:text="Nombre:"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textViewNombreUsuarioPlaceholder"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="Nombre de Usuario"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/textViewNombreUsuario"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!--TextViews para los Apellidos del usuario-->
+            <TextView
+                android:id="@+id/textViewApellidosUsuario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="180dp"
+                android:text="Apellidos:"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textViewApellidosUsuarioPlaceholder"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="Apellidos de Usuario"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/textViewApellidosUsuario"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!--TextViews para el Correo del usuario-->
+            <TextView
+                android:id="@+id/textViewCorreoUsuario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="50dp"
+                android:text="Correo:"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textViewCorreoUsuarioPlaceholder"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="50dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="Correo de Usuario"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/textViewCorreoUsuario"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <!--TextViews para la Ciudad del usuario-->
+            <TextView
+                android:id="@+id/textViewCiudadUsuario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="180dp"
+                android:layout_marginTop="25dp"
+                android:text="Ciudad:"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textViewCiudadUsuarioPlaceholder"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="25dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="Ciudad de Usuario"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/textViewCiudadUsuario"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!--TextViews para la fecha de nacimiento del usuario-->
+            <TextView
+                android:id="@+id/textViewFechaUsuario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="25dp"
+                android:text="F.Nacimiento:"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textViewNacimientoUsuarioPlaceholder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="25dp"
+                android:text="XX-XX-XXXX"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/textViewFechaUsuario"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!--TextViews para el privilegio del usuario-->
+
+            <!--TextViews para el privilegio del usuario-->
+            <TextView
+                android:id="@+id/textViewAdminUsuario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="75dp"
+                android:text="Admin:"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textViewAdminUsuarioPlaceholder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="75dp"
+                android:text="No"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/textViewAdminUsuario"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textViewActivoUsuario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="75dp"
+                android:layout_marginStart="180dp"
+                android:text="Baneado:"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textViewActivoUsuarioPlaceholder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="75dp"
+                android:text="No"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/textViewActivoUsuario"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!--Información sobre las actividades del usuario-->
+        <TextView
+            android:id="@+id/desplegable_actividades_usuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textStyle="bold"
+            android:text="Actividades"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            />
+        <TextView
+            android:id="@+id/desplegable_actividades_usuario_creadas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:textStyle="bold"
+            android:text="Creadas"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewActividadesCreadas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/layout_border"
+            app:layout_constraintTop_toBottomOf="@+id/desplegable_actividades_usuario_participadas"
+            tools:layout_editor_absoluteX="16dp"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/desplegable_actividades_usuario_participadas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:textStyle="bold"
+            android:text="Participadas"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewActividadesParticipante"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/layout_border"
+            app:layout_constraintTop_toBottomOf="@+id/desplegable_actividades_usuario_participadas"
+            tools:layout_editor_absoluteX="16dp"
+            android:visibility="gone"/>
+
+        <!--Información sobre los equipos del usuario-->
+        <TextView
+            android:id="@+id/desplegable_equipos_usuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textStyle="bold"
+            android:text="Equipos"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            />
+        <TextView
+            android:id="@+id/desplegable_equipos_usuario_lider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:textStyle="bold"
+            android:text="Creados"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewEquiposLider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/layout_border"
+            app:layout_constraintTop_toBottomOf="@+id/desplegable_equipos_usuario"
+            tools:layout_editor_absoluteX="16dp"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/desplegable_equipos_usuario_miembro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:textStyle="bold"
+            android:text="Miembro de"
+            android:background="?android:attr/selectableItemBackground"
+
+            android:clickable="true"
+            android:focusable="true"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewEquiposMiembro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/layout_border"
+            app:layout_constraintTop_toBottomOf="@+id/desplegable_equipos_usuario"
+            tools:layout_editor_absoluteX="16dp"
+            android:visibility="gone"/>
+
+        <!--Información sobre los reportes del usuario-->
+        <TextView
+            android:id="@+id/desplegable_reportes_usuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textStyle="bold"
+            android:text="Reportes"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            />
+
+        <TextView
+            android:id="@+id/desplegable_reportes_usuario_reportante"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:text="Realizados"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewReportesReportante"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/layout_border"
+            app:layout_constraintTop_toBottomOf="@+id/desplegable_reportes_usuario_reportante"
+            tools:layout_editor_absoluteX="16dp"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/desplegable_reportes_usuario_reportado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:text="Recibidos"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewReportesReportado"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/layout_border"
+            app:layout_constraintTop_toBottomOf="@+id/desplegable_reportes_usuario_reportante"
+            tools:layout_editor_absoluteX="16dp"
+            android:visibility="gone"/>
+
+        <!--Información sobre los pagos del usuario-->
+        <TextView
+            android:id="@+id/desplegable_pagos_usuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textStyle="bold"
+            android:text="Historial de Pagos"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewPagos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/layout_border"
+            app:layout_constraintTop_toBottomOf="@+id/desplegable_pagos_usuario"
+            tools:layout_editor_absoluteX="16dp"
+            android:visibility="gone"/>
+
+        <Button
+            android:id="@+id/btnUnirse"
+            android:layout_width="215dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="27dp"
+            android:background="@color/red"
+            android:text="Banear al usuario" />
+
+    </LinearLayout>
+</ScrollView>

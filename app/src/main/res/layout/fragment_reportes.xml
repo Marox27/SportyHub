@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- fragment_reportes.xml -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/tv_admin_report"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:text="Administración de Reportes"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:background="@color/mainOrange"
+        android:padding="20dp" />
+
+    <LinearLayout
+        android:id="@+id/admin_report_search_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/tv_admin_report"
+        android:weightSum="1"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/admin_report_search_layout">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewReportesReportante"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    </ScrollView>
+
+</RelativeLayout>

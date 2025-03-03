@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">SportyHub</string>
+    <string name="open_drawer">Abrir menú</string>
+    <string name="close_drawer">Cerrar menú</string>
+    <string name="edit_profile_email">Email</string>
+    <string name="edit_profile_name">Nombre</string>
+    <string name="edit_profile_pfp">Imagen de Perfil</string>
+    <string name="edit_profile_username">Nombre de usuario</string>
+    <string name="edit_profile_last_name">Apellidos</string>
+    <string name="edit_profile_password">Contraseña</string>
+    <string name="edit_profile_phone_number">Teléfono</string>
+    <string name="edit_profile_city">Ciudad</string>
+    <string name="guardar_cambios_save_changes_button">Guardar Cambios</string>
+    <string name="edit_profile_delete_account">Eliminar cuenta</string>
+    <string name="num_de_participantes">Número de Participantes (Min %d, Máx %d)</string>
+
+</resources>

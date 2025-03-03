@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="8dp"
+    android:gravity="center_vertical"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true">
+
+    <!-- Imagen de perfil -->
+    <ImageView
+        android:id="@+id/imageViewAvatar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/default_pfp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/circle_background"/>
+
+    <!-- Nombre del miembro -->
+    <TextView
+        android:id="@+id/nombreMiembro"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Nombre del miembro"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <!-- Botón de opciones -->
+    <ImageView
+        android:id="@+id/menuOpciones"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/more_vert"
+        android:contentDescription="Menú opciones"
+        android:padding="4dp"/>
+</LinearLayout>

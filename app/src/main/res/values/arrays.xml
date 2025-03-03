@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="deportes_array">
+        <item>Fútbol</item>
+        <item>Baloncesto</item>
+        <item>Tenis</item>
+        <item>Pádel</item>
+        <item>Ciclismo</item>
+        <item>Running</item>
+        <item>Natación</item>
+        <item>Senderismo</item>
+        <item>Gimnasio</item>
+        <item>Yoga</item>
+        <item>Crossfit</item>
+    </string-array>
+</resources>

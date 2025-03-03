@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Título del equipo -->
+    <TextView
+        android:id="@+id/teamName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nombre del equipo"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="20dp"/>
+
+    <!-- Lista de miembros del equipo -->
+    <TextView
+        android:id="@+id/teamMembers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Miembros del equipo:"
+        android:textSize="16sp"
+        android:layout_marginBottom="10dp"/>
+
+    <!-- Lista de miembros -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/membersRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/layout_border"/>
+
+    <!-- Botón para salir del equipo -->
+    <Button
+        android:id="@+id/leaveTeamButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Salir del equipo"
+        android:layout_marginTop="20dp"/>
+</LinearLayout>

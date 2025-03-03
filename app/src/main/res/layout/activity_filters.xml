@@ -1,0 +1,101 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- Etiqueta "Distancia" -->
+    <TextView
+        android:id="@+id/textViewDistancia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Distancia:"
+        android:textSize="16sp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp" />
+
+    <!-- Slider para elegir la distancia -->
+    <com.google.android.material.slider.Slider
+        android:id="@+id/sliderDistancia"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewDistancia"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:stepSize="5"
+        android:valueFrom="5"
+        android:valueTo="100" />
+
+    <TextView
+        android:id="@+id/textViewDeporte"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Deporte"
+        android:textSize="16sp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_toEndOf="@id/sliderDistancia"
+        />
+
+    <Spinner
+        android:id="@+id/spinnerDeporte"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_toEndOf="@id/sliderDistancia"
+        android:layout_below="@id/textViewDeporte"
+        />
+
+    <Button
+        android:id="@+id/filter_ok"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewDeporte"
+        android:layout_toEndOf="@id/spinnerDeporte"
+        android:text="OK"
+        />
+
+    <!-- Texto para mostrar los kilómetros seleccionados -->
+    <TextView
+        android:id="@+id/textViewKilometros"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0 km"
+        android:textSize="16sp"
+        android:layout_toEndOf="@id/textViewDistancia"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp" />
+
+    <ScrollView
+        android:id="@+id/Scroll_actividades"
+        android:layout_width="match_parent"
+        android:layout_height="410dp"
+        android:layout_below="@id/sliderDistancia"
+        android:layout_alignStart="@+id/sliderDistancia"
+        android:layout_marginEnd="10dp">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewActividadesParticipante"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="8dp"
+        />
+    </ScrollView>
+
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mapa_de_actividades"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="20dp"
+        app:cameraZoom="20"
+        android:layout_below="@id/Scroll_actividades"
+        app:uiRotateGestures="true"
+        app:uiZoomControls="true" />
+
+
+    <!-- Agrega más elementos según sea necesario -->
+
+</RelativeLayout>

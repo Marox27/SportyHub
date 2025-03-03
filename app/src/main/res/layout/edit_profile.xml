@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <!-- Imagen de Usuario -->
+        <ImageView
+            android:id="@+id/ivUserProfile"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="16dp"
+            android:src="@drawable/ic_profile"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/edit_profile_pfp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Información Básica"
+            android:textStyle="bold"
+            />
+        <!-- Campo: Nombre -->
+        <EditText
+            android:id="@+id/etFirstName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/edit_profile_name"
+            android:layout_marginTop="12dp"
+            android:padding="12dp"
+            android:inputType="text"
+            android:background="@drawable/edittext_background"
+            android:autofillHints="" />
+
+        <!-- Campo: Apellidos -->
+        <EditText
+            android:id="@+id/etLastName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/edit_profile_last_name"
+            android:layout_marginTop="12dp"
+            android:padding="12dp"
+            android:background="@drawable/edittext_background"
+            android:importantForAutofill="no"
+            android:inputType="text" />
+
+        <!-- Campo: Ciudad -->
+        <Spinner
+            android:id="@+id/spCity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/edit_profile_city"
+            android:layout_marginTop="12dp"
+            android:padding="12dp"
+            android:background="@drawable/edittext_background"
+            android:popupBackground="@drawable/spinner_background"
+            android:importantForAutofill="no"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="Dirección de Correo"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvCorreoUsuario"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Correo Placeholder"/>
+
+        <Button
+            android:id="@+id/btnEditarCorreo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/mainOrange"
+            android:hint="Cambiar correo"
+            android:textColor="@color/black"
+            android:layout_marginTop="20dp"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="Contraseña"
+            android:textStyle="bold" />
+        <Button
+            android:id="@+id/btnEditarPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@color/buttonBackground"
+            android:hint="Cambiar contraseña"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/btnSaveChanges"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/guardar_cambios_save_changes_button"
+            android:layout_marginTop="80dp"
+            android:padding="12dp"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:background="@color/mainOrange"/>
+
+
+        <!-- Texto: Eliminar cuenta -->
+        <TextView
+            android:id="@+id/tvDeleteAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/edit_profile_delete_account"
+            android:textColor="#FF0000"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:padding="8dp" />
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- Nombre del equipo -->
+    <TextView
+        android:id="@+id/nombreEquipo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nombre del Equipo"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:background="@color/mainOrange"
+        android:gravity="center"
+        android:padding="16dp"
+        android:paddingBottom="8dp" />
+
+    <!-- Descripción del equipo -->
+    <TextView
+        android:id="@+id/descripcionEquipo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Descripción del equipo"
+        android:textSize="16sp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:paddingBottom="16dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Miembros del equipo"
+        android:layout_marginHorizontal="8dp"
+        android:textSize="16sp"
+        android:gravity="start" />
+
+    <!-- Lista de miembros -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewMiembros"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        android:background="@drawable/layout_border"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+    <!-- Botón para abandonar el equipo -->
+    <Button
+        android:id="@+id/btnAbandonarEquipo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Abandonar Equipo"
+        android:textSize="16sp"
+        android:layout_marginHorizontal="8dp"
+        android:backgroundTint="@color/red"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="16dp"/>
+</LinearLayout>
+

@@ -1,0 +1,153 @@
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/layout_border"
+        android:orientation="horizontal">
+
+        <!-- Imagen de la actividad -->
+        <ImageView
+            android:id="@+id/imageViewActividad"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:src="@drawable/activities" />
+
+        <!-- Contenedor para el título y descripción -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:orientation="vertical">
+
+            <!-- Título de la actividad -->
+            <TextView
+                android:id="@+id/textViewDeporteActividad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Deporte de la actividad"
+                android:textSize="12sp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="2dp"
+                android:textAlignment="textStart"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/textViewTituloActividad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Título de la actividad"
+                android:textSize="20sp"
+                android:layout_marginTop="-3dp"
+                android:layout_marginStart="5dp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+            <!-- Descripción de la actividad -->
+            <TextView
+                android:id="@+id/textViewFechaActividad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Inicia: XX-XX-XXXX"
+                android:layout_marginStart="5dp"
+                />
+                <TextView
+                android:id="@+id/textViewHoraActividad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hora"
+                android:layout_marginStart="50dp"
+                />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="5dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textViewEtiqueta1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/etiqueta_background"
+                        android:layout_marginStart="5dp"
+                        android:padding="1.5dp"
+                        android:text="Etiqueta 1"/>
+
+                    <TextView
+                        android:id="@+id/textViewEtiqueta2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/etiqueta_background"
+                        android:layout_marginStart="5dp"
+                        android:padding="1.5dp"
+                        android:text="Etiqueta 2"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/textViewEtiqueta3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/etiqueta_background"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginStart="5dp"
+                        android:padding="1.5dp"
+                        android:text="Etiqueta 3"/>
+
+                    <TextView
+                        android:id="@+id/textViewEtiqueta4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/etiqueta_background"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginStart="5dp"
+                        android:padding="1.5dp"
+                        android:text="Etiqueta 4"/>
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"/>
+
+                    <TextView
+                        android:id="@+id/textViewCoste"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Coste:"/>
+
+                    <TextView
+                        android:id="@+id/textViewPrecio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/status_background"
+                        android:textSize="15sp"
+                        android:padding="3dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="Precio"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

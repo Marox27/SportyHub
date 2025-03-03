@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Campo para la foto del equipo -->
+    <ImageButton
+        android:id="@+id/imageViewEquipo"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:scaleType="fitCenter"
+        android:src="@drawable/activities"
+        android:layout_marginTop="4dp"/>
+
+    <!-- Campo de texto para el nombre del equipo -->
+    <EditText
+        android:id="@+id/editTextNombreEquipo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nombre del equipo"
+        android:layout_marginTop="8dp"/>
+
+    <!-- Campo de texto para el nombre del equipo -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Deporte"
+        android:layout_marginTop="8dp"/>
+
+    <!-- Spinner para seleccionar el deporte -->
+    <Spinner
+        android:id="@+id/spinnerDeporte"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"/>
+
+    <!-- TextView para la ubicación del equipo -->
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ubicación"
+        android:layout_marginTop="16dp"/>
+
+    <!-- Layout Horizontal para los Spinners de Provincia y Municipio -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <!-- Spinner para elegir la provincia -->
+        <Spinner
+            android:id="@+id/spinnerProvincia"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"/>
+
+        <!-- Spinner para elegir el municipio -->
+        <Spinner
+            android:id="@+id/spinnerMunicipio"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"/>
+    </LinearLayout>
+
+    <!-- TextView para la privacidad del equipo -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:text="Privacidad"
+        android:layout_marginTop="16dp"/>
+
+    <!-- Spinner para seleccionar la privacidad -->
+    <Spinner
+        android:id="@+id/spinnerPrivacidad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginTop="8dp"/>
+
+    <!-- TextView para la descripción -->
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Descripción/Detalles"
+        android:layout_marginTop="16dp"/>
+
+    <!-- EditText para la descripción -->
+    <EditText
+        android:id="@+id/editTextDescripcion"
+        android:layout_width="match_parent"
+        android:layout_height="121dp"
+        android:layout_marginTop="8dp"
+        android:inputType="textMultiLine"
+        android:gravity="start|top"/>
+
+    <!-- Botón para crear el equipo -->
+    <Button
+        android:id="@+id/buttonCrearEquipo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:text="Crear Equipo"
+        android:layout_marginTop="16dp"/>
+
+</LinearLayout>

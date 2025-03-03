@@ -1,0 +1,43 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <!-- Botón para abrir el menú de filtros -->
+    <Button
+        android:id="@+id/btn_filtros"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Abrir Filtros" />
+
+    <ScrollView
+        android:id="@+id/Scroll_actividades"
+        android:layout_width="match_parent"
+        android:layout_height="350dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewActividadesParticipante"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"/>
+    </ScrollView>
+
+    <FrameLayout
+        android:id="@+id/fl_mapa_de_actividades"
+        android:background="@android:color/transparent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mapa_de_actividades"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        app:cameraZoom="20"
+        app:uiRotateGestures="true"
+        app:uiZoomControls="true"/>
+    </FrameLayout>
+
+</LinearLayout>
