@@ -460,7 +460,7 @@ public class EditarEquipo extends AppCompatActivity {
     }
 
 
-    // Habiendo seleccionado una provincia en el spinner, esta método se encarga de enviar una petición que
+    // Habiendo seleccionado una provincia en el spinner, esta función se encarga de enviar una petición que
     // devuelva los municipios relacionados con la provincia seleccionada y los carga en el spinner del lyt.
     private void cargarMunicipios(Spinner spinner, int idProvincia) {
         ApiService apiService = ApiClient.getApiService(this);

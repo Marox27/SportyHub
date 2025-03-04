@@ -14,7 +14,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 
 public class ApiClient {
-    private static final String BASE_URL = "http://192.168.0.14:8080";//192.168.0.14:8080 192.168.228.108 https://sportyrest.onrender.com // URL base de tu API
+    private static final String BASE_URL = "https://sportyrest.onrender.com";//http://192.168.0.14:8080 192.168.228.108 https://sportyrest.onrender.com // URL base de tu API
     private static Retrofit retrofit = null;
 
     public static Retrofit getClient(Context context) {

@@ -438,7 +438,7 @@ public class ActivityListFragment extends Fragment {
         mapView.getMapAsync(googleMap -> {
             if (googleMap != null) {
                 mMap = googleMap;
-                actualizarMapa(listaActividadesOriginal); // Llama a tu método para actualizar el mapa
+                actualizarMapa(listaActividadesOriginal); // Llamar a la funcion para actualizar el mapa
             } else {
                 Log.e("MapError", "No se pudo obtener el GoogleMap.");
             }
