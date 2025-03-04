@@ -25,6 +25,7 @@ import androidx.core.content.ContextCompat;
 import com.bumptech.glide.Glide;
 import com.example.sportyhub.Api.ApiClient;
 import com.example.sportyhub.Api.ApiService;
+import com.example.sportyhub.Login;
 import com.example.sportyhub.MainActivity;
 import com.example.sportyhub.Modelos.Provincia;
 import com.example.sportyhub.Modelos.Usuario;
@@ -277,7 +278,7 @@ public class EditProfile extends AppCompatActivity {
 
         builder.setPositiveButton("Confirmar Eliminación", (dialog2, which2) -> {
             String userInput = input.getText().toString().trim();
-            if ("CONFIRMAR".equalsIgnoreCase(userInput)) {
+            if ("CONFIRMAR".equals(userInput)) {
                 eliminarCuenta(usuario);
             } else {
                 Toast.makeText(context, "Texto incorrecto. Se canceló la eliminación.", Toast.LENGTH_SHORT).show();
@@ -300,8 +301,8 @@ public class EditProfile extends AppCompatActivity {
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                 if (response.body() != null && response.isSuccessful()) {
                     if (response.body()){
-
-
+                        Intent intent = new Intent(getApplicationContext(), Login.class);
+                        startActivity(intent);
                     }else{
                         Toast.makeText(getApplicationContext(), "¡No se ha podido eliminar la cuenta!"
                         , Toast.LENGTH_LONG).show();

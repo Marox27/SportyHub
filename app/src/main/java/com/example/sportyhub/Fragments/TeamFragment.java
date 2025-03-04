@@ -43,7 +43,8 @@ public class TeamFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_equipo_list, container, false);
+        View rootView = usuario.isAdmin() ? inflater.inflate(R.layout.fragment_equipo_admin, container, false)
+                : inflater.inflate(R.layout.fragment_equipo_list, container, false);
 
         recyclerView = rootView.findViewById(R.id.recyclerViewEquiposLider);
         // Configurar el RecyclerView con un LinearLayoutManager

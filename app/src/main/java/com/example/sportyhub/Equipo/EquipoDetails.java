@@ -6,12 +6,14 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -44,6 +46,7 @@ public class EquipoDetails extends AppCompatActivity {
     boolean unido = false;;
     Usuario usuario = null;
     Equipo equipo = null;
+    boolean isAdmin = false;
 
     Toolbar toolbar;
 
@@ -61,6 +64,7 @@ public class EquipoDetails extends AppCompatActivity {
         equipo = getIntent().getParcelableExtra("Equipo", Equipo.class);
         usuario = getIntent().getParcelableExtra("usuario", Usuario.class);
         int id_usuario = usuario.getIdUsuario().intValue();
+        isAdmin = usuario.isAdmin();
 
 
         equipo_imagen = findViewById(R.id.imageViewEquipo);
@@ -104,26 +108,40 @@ public class EquipoDetails extends AppCompatActivity {
         equipo_municipio.setText(municipio_equipo);
         equipo_detalles.setText(detalles_equipo);
 
-        if (privacidad_equipo.equals("PÚBLICA")){
+        /*if (privacidad_equipo.equals("PÚBLICA")){
             button.setText("Unirse al equipo");
         }else {
             button.setText("Solicitar unirse");
-        }
+        }*/
+
+        button.setText(isAdmin ? "Eliminar equipo" : "Unirse al equipo");
 
         // Botón para unirse al equipo
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (unido){
-                    Toast.makeText(getApplicationContext(), "¡Ya estás unido a este equipo!", Toast.LENGTH_SHORT).show();
-                    button.setEnabled(false);
-                }
-                else if (privacidad_equipo.equals("PÚBLICA")){
-                    unirseAEquipo(usuario, equipo);
-                }else {
-                    Toast.makeText(getApplicationContext(), "¡Se ha solicitado la unión a este equipo!", Toast.LENGTH_SHORT).show();
-                    // INSERTAR LA LÓGICA DE SOLICITUD DE UNIÓN
-                    finish();
+                if (isAdmin){
+                    new AlertDialog.Builder(v.getContext())
+                            .setTitle("¿Estás seguro?")
+                            .setMessage("¿Estás seguro de eliminar el equipo? Esta acción no puede deshacerse.")
+                            .setPositiveButton("Eliminar el equipo", (dialog2, which2) ->
+                                    eliminarEquipo())
+                            .setNegativeButton("Cancelar", (dialog2, which2) -> {
+                                dialog2.dismiss();})
+                            .show();
+
+                }else{
+                    if (unido){
+                        Toast.makeText(getApplicationContext(), "¡Ya estás unido a este equipo!", Toast.LENGTH_SHORT).show();
+                        button.setEnabled(false);
+                    }
+                    else if (privacidad_equipo.equals("PÚBLICA")){
+                        unirseAEquipo(usuario, equipo);
+                    }else {
+                        Toast.makeText(getApplicationContext(), "¡Se ha solicitado la unión a este equipo!", Toast.LENGTH_SHORT).show();
+                        // INSERTAR LA LÓGICA DE SOLICITUD DE UNIÓN
+                        finish();
+                    }
                 }
             }
         });
@@ -189,9 +207,25 @@ public class EquipoDetails extends AppCompatActivity {
                         finish();
 
                     }
-                    EquipoMiembroAdapter adapter = new EquipoMiembroAdapter(listaMiembros);
+                    EquipoMiembroAdapter adapter2 = new EquipoMiembroAdapter(listaMiembros);
                     recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                    recyclerView.setAdapter(adapter);
+                    recyclerView.setAdapter(adapter2);
+
+                    recyclerView.post(() -> {
+                        int totalHeight = 0;
+                        RecyclerView.Adapter adapter = recyclerView.getAdapter();
+                        if (adapter != null) {
+                            for (int i = 0; i < adapter.getItemCount(); i++) {
+                                View item = adapter.createViewHolder(recyclerView, adapter.getItemViewType(i)).itemView;
+                                item.measure(0, 0);
+                                totalHeight += item.getMeasuredHeight();
+                            }
+                        }
+                        ViewGroup.LayoutParams params = recyclerView.getLayoutParams();
+                        params.height = totalHeight;
+                        recyclerView.setLayoutParams(params);
+                    });
+
                     equipo_miembros.setText("" + numero_miembros);
                 } else {
                     Toast.makeText(getApplicationContext(), "Error al cargar los miembros.", Toast.LENGTH_SHORT).show();
@@ -241,6 +275,28 @@ public class EquipoDetails extends AppCompatActivity {
 
     }
 
+    private void eliminarEquipo() {
+        ApiService apiService = ApiClient.getApiService(getApplicationContext());
+        Call<Void> call = apiService.eliminarEquipo(equipo.getIdequipo());
 
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(getApplicationContext(), "Equipo eliminado", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    intent.putExtra("usuario", usuario);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "Error al eliminar equipo", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
 }

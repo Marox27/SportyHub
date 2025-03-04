@@ -36,8 +36,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class AdminMainActivity extends AppCompatActivity {
-    private List<Actividad>actividades;
-    private List<Usuario>usuarios;
+    private List<Actividad>actividades = new ArrayList<>();
+    private List<Usuario>usuarios = new ArrayList<>();
     private List<Equipo>equipos;
     private List<Reporte>reportes;
     private Usuario usuario;
@@ -73,7 +73,7 @@ public class AdminMainActivity extends AppCompatActivity {
                 } else if (itemId == R.id.nav_equipos) {
                     selectedFragment = new TeamFragment(equipos, usuario);
                 } else if (itemId == R.id.nav_others) {
-                    selectedFragment = new AdminOtherFragment();
+                    selectedFragment = new AdminOtherFragment(usuario);
                 }
 
                 getSupportFragmentManager().beginTransaction()
@@ -88,20 +88,22 @@ public class AdminMainActivity extends AppCompatActivity {
         call.enqueue(new Callback<List<Usuario>>() {
             @Override
             public void onResponse(Call<List<Usuario>> call, Response<List<Usuario>> response) {
-                if (response.isSuccessful()) {
-                    usuarios = response.body();
+                if (response.isSuccessful() && response.body() != null) {
+                    List<Usuario> listaUsuarios = response.body();
+                    usuarios.clear();
 
-                    // Filtramos para crear una lista solo con los usuarios que no son administradores.
-                    List<Usuario> listaUsuarios = new ArrayList<>();
-                    for (Usuario usuario: usuarios) {
-                        if (!usuario.isAdmin()){
-                            listaUsuarios.add(usuario);
+                    if (!listaUsuarios.isEmpty()) {
+                        // Filtramos para crear una lista solo con los usuarios que no son administradores.
+                        for (Usuario usuario : listaUsuarios) {
+                            if (!usuario.isAdmin()) {
+                                usuarios.add(usuario);
+                            }
                         }
                     }
 
                     // Cargar el fragmento inicial (Usuarios)
                     getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.fragment_container, new UserFragment(listaUsuarios, usuario)).commit();
+                            .replace(R.id.fragment_container, new UserFragment(usuarios, usuario)).commit();
                 } else {
                     Log.e("API", "Error en la respuesta: " + response.code());
                 }

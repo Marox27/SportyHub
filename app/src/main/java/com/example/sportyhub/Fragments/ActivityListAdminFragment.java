@@ -56,8 +56,8 @@ public class ActivityListAdminFragment extends Fragment {
                 // Abrir la pantalla de detalles de la actividad
                 // PENDIENTE ACTIVITYADMIN
                 Intent intent = new Intent(getActivity(), ActivityDetails.class);
-                intent.putExtra("actividad", actividadSeleccionada);
-                intent.putExtra("usuario", usuario);
+                intent.putExtra("actividad_seleccionada", actividadSeleccionada);
+                intent.putExtra("usuario_actual", usuario);
 
                 startActivity(intent);
             }

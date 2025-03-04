@@ -3,6 +3,7 @@ package com.example.sportyhub.Equipo;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -11,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.sportyhub.Adapters.EquipoMiembroAdminAdapter;
 import com.example.sportyhub.Api.ApiClient;
 import com.example.sportyhub.Api.ApiService;
@@ -30,6 +32,7 @@ public class EquipoDetailsAdmin extends AppCompatActivity {
     private Equipo equipo;
     private Usuario usuario;
     private RecyclerView recyclerViewMiembros;
+    private ImageView imageView;
     private TextView nombreEquipo, descripcionEquipo;
     private Button btnEliminarEquipo, btnEditarEquipo;
 
@@ -43,6 +46,7 @@ public class EquipoDetailsAdmin extends AppCompatActivity {
 
         nombreEquipo = findViewById(R.id.nombreEquipo);
         descripcionEquipo = findViewById(R.id.descripcionEquipo);
+        imageView = findViewById(R.id.logoEquipo);
         recyclerViewMiembros = findViewById(R.id.recyclerViewMiembros);
         btnEliminarEquipo = findViewById(R.id.btnEliminarEquipo);
         btnEditarEquipo = findViewById(R.id.btnEditarEquipo);
@@ -50,6 +54,13 @@ public class EquipoDetailsAdmin extends AppCompatActivity {
 
         nombreEquipo.setText(equipo.getNombre());
         descripcionEquipo.setText(equipo.getDetalles());
+        // Cargar la imagen desde la URL usando Glide
+        Glide.with(getApplicationContext())
+                .load(equipo.getImagen())
+                .placeholder(R.drawable.default_pfp) // Imagen por defecto mientras carga
+                .error(R.drawable.error_placeholder)       // Imagen por defecto si ocurre un error
+                .into(imageView);
+
 
         cargarMiembros();
 
@@ -60,9 +71,16 @@ public class EquipoDetailsAdmin extends AppCompatActivity {
                     .setPositiveButton("Eliminar el equipo", (dialog2, which2) ->
                             eliminarEquipo())
                     .setNegativeButton("Cancelar", (dialog2, which2) -> {
-                        dialog2.dismiss();});
+                        dialog2.dismiss();})
+                    .show();
         });
-        btnEditarEquipo.setOnClickListener(v -> Toast.makeText(getApplicationContext(), "Por incorporar", Toast.LENGTH_SHORT).show());
+
+        btnEditarEquipo.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), EditarEquipo.class);
+            intent.putExtra("usuario", usuario);
+            intent.putExtra("equipo", equipo);
+            startActivity(intent);
+        });
     }
 
     private void cargarMiembros() {

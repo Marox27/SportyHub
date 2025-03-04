@@ -401,29 +401,6 @@ public class CrearEquipo extends AppCompatActivity{
         });
     }
 
-    /*
-    // Crear un miembro en un equipo
-    public void crearMiembro() {
-        ApiService apiService = ApiClient.getApiService(this);
-        apiService.crearMiembro(equipoMiembro).enqueue(new Callback<>() {
-            @Override
-            public void onResponse(Call<EquipoMiembro> call, Response<EquipoMiembro> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    Log.e("API", "El miembro ha sido creado con éxito");
-                    finish();
-                } else {
-                    Toast.makeText(getApplicationContext(), "Error al crear el miembro.", Toast.LENGTH_SHORT).show();
-                }
-            }
-            @Override
-            public void onFailure(Call<EquipoMiembro> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "Error al crear el miembro.", Toast.LENGTH_SHORT).show();
-                Log.e("API", "Error al crear el usuario", t);
-            }
-        });
-    }
-    */
-
 
     /*==============================================================================================
     * FUNCIONES DE CARGA DE DATOS

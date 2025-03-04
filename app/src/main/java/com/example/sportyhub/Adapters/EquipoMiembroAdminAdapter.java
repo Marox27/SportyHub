@@ -45,7 +45,12 @@ public class EquipoMiembroAdminAdapter extends RecyclerView.Adapter<EquipoMiembr
     @Override
     public void onBindViewHolder(@NonNull MiembroViewHolder holder, int position) {
         EquipoMiembro miembro = listaMiembros.get(position);
-        holder.textViewNombre.setText(miembro.getUsuario().getNickname());
+
+        if (miembro.getRol().equals(EquipoMiembro.Rol.ADMIN)) {
+            holder.textViewNombre.setText(miembro.getUsuario().getNickname() + " ⭐(LÍDER)");
+        }else{
+            holder.textViewNombre.setText(miembro.getUsuario().getNickname());
+        }
 
         Glide.with(holder.itemView.getContext())
                 .load(miembro.getUsuario().getPfp())
@@ -66,14 +71,15 @@ public class EquipoMiembroAdminAdapter extends RecyclerView.Adapter<EquipoMiembr
         popupMenu.inflate(R.menu.menu_miembro);
         popupMenu.setOnMenuItemClickListener(item -> {
             if (item.getItemId() == R.id.opcion_eliminar) {
-                if (miembro.getUsuario().getIdUsuario() != miembro.getEquipo().getCreador()) {
+                if (!miembro.getRol().equals(EquipoMiembro.Rol.ADMIN)) {
                     new AlertDialog.Builder(view.getContext())
                             .setTitle("¿Estás seguro?")
                             .setMessage("Estás seguro de echar a este usuario del equipo.")
                             .setPositiveButton("Echar del equipo", (dialog2, which2) ->
                                     eliminarMiembro(miembro, position, view.getContext()))
                             .setNegativeButton("Cancelar", (dialog2, which2) -> {
-                                dialog2.dismiss();});
+                                dialog2.dismiss();})
+                            .show();
                     return true;
                 }else {
                     Toast.makeText(view.getContext(), "No puedes echarte a ti mismo", Toast.LENGTH_SHORT).show();

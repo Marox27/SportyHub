@@ -38,8 +38,12 @@ public class EquipoMiembroAdapter extends RecyclerView.Adapter<EquipoMiembroAdap
     @Override
     public void onBindViewHolder(@NonNull ParticipanteViewHolder holder, int position) {
         EquipoMiembro miembro = listaMiembros.get(position);
-        holder.textViewNombre.setText(miembro.getUsuario().getNickname());
 
+        if (miembro.getRol().equals(EquipoMiembro.Rol.ADMIN)) {
+            holder.textViewNombre.setText(miembro.getUsuario().getNickname() + " ⭐(LÍDER)");
+        }else{
+            holder.textViewNombre.setText(miembro.getUsuario().getNickname());
+        }
         // Cargar la imagen desde la URL usando Glide
         Glide.with(holder.itemView.getContext())
                 .load(miembro.getUsuario().getPfp())

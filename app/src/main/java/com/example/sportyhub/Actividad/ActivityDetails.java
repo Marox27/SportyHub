@@ -84,6 +84,7 @@ public class ActivityDetails extends AppCompatActivity implements OnMapReadyCall
     Usuario usuario;
     Actividad actividadSeleccionada;
     double precioActividad;
+    boolean is_admin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,6 +109,7 @@ public class ActivityDetails extends AppCompatActivity implements OnMapReadyCall
         precioActividad = actividadSeleccionada.getPrecio() / actividadSeleccionada.getParticipantesNecesarios();
         precioActividad = Math.round(precioActividad * 100.0) / 100.0;
         int idActividad = actividadSeleccionada.getIdActividad();
+        is_admin = usuario.isAdmin();
 
         // Configuramos los ajustes para la pasarela de pago
         PayPalCheckout.setConfig(new CheckoutConfig(
@@ -169,54 +171,64 @@ public class ActivityDetails extends AppCompatActivity implements OnMapReadyCall
 
             // Determina el mensaje según el estado del usuario en la actividad
             String titulo, mensaje;
-            if (isUsuarioUnido){
-                if (isUsuarioCreador){
-                    titulo = "Cancelar Actividad";
-                    mensaje = "¿Seguro que deseas cancelar la actividad?";
-                }else {
-                    titulo = "Confirmar salida";
-                    mensaje = "¿Seguro que quieres abandonar la actividad?";
-                }
+            if (is_admin){
+                titulo = "Eliminar actividad";
+                mensaje = "Al eliminar la actividad, se cancelaran todas las participaciones y se devolveran los pagos.\n" +
+                        "¿Seguro que desea continuar?";
             }else {
-                titulo = "Confirmar unión";
-                mensaje = "¿Seguro que quieres unirte a la actividad?";
+                if (isUsuarioUnido) {
+                    if (isUsuarioCreador) {
+                        titulo = "Cancelar Actividad";
+                        mensaje = "¿Seguro que deseas cancelar la actividad?";
+                    } else {
+                        titulo = "Confirmar salida";
+                        mensaje = "¿Seguro que quieres abandonar la actividad?";
+                    }
+                } else {
+                    titulo = "Confirmar unión";
+                    mensaje = "¿Seguro que quieres unirte a la actividad?";
+                }
             }
 
             builder.setTitle(titulo)
                     .setMessage(mensaje)
                     .setPositiveButton("Sí", (dialog, which) -> {
-                        if (isUsuarioUnido) {
-                            if (isUsuarioCreador){
-                                cancelarActividad(idActividad);
-                            }else{
-                                // Si la actividad es gratuita, se abandona directamente
-                                if (precioActividad == 0) {
-                                    abandonarActividadGratis(idActividad, id_user);
-                                } else {
-                                    // Si es de pago, verificamos si el usuario tiene derecho a reembolso
-                                    if (!comprobarPosibleReembolso()) {
-                                        // Si no tiene derecho a reembolso, se muestra una advertencia adicional
-                                        new AlertDialog.Builder(v.getContext())
-                                                .setTitle("Último aviso")
-                                                .setMessage("Debido a que la cancelación de tu participación es muy cercana " +
-                                                        "al inicio de la actividad, no tendrás derecho a la devolución del coste.")
-                                                .setPositiveButton("Confirmar abandono", (dialog2, which2) ->
-                                                        abandonarActividadGratis(idActividad, id_user))
-                                                .setNegativeButton("Cancelar", (dialog2, which2) -> {
-                                                        dialog2.dismiss();
-                                                        btnUnirse.setEnabled(true); // Volver a activar el botón si cancela
-                                                })
-                                                .show();
+                        if (is_admin){
+                            cancelarActividad(idActividad);
+                        }else {
+                            if (isUsuarioUnido) {
+                                if (isUsuarioCreador){
+                                    cancelarActividad(idActividad);
+                                }else{
+                                    // Si la actividad es gratuita, se abandona directamente
+                                    if (precioActividad == 0) {
+                                        abandonarActividadGratis(idActividad, id_user);
                                     } else {
-                                        // Si tiene derecho a reembolso, se abandona directamente
-                                        abandonarActividadPago(idActividad, id_user);
+                                        // Si es de pago, verificamos si el usuario tiene derecho a reembolso
+                                        if (!comprobarPosibleReembolso()) {
+                                            // Si no tiene derecho a reembolso, se muestra una advertencia adicional
+                                            new AlertDialog.Builder(v.getContext())
+                                                    .setTitle("Último aviso")
+                                                    .setMessage("Debido a que la cancelación de tu participación es muy cercana " +
+                                                            "al inicio de la actividad, no tendrás derecho a la devolución del coste.")
+                                                    .setPositiveButton("Confirmar abandono", (dialog2, which2) ->
+                                                            abandonarActividadGratis(idActividad, id_user))
+                                                    .setNegativeButton("Cancelar", (dialog2, which2) -> {
+                                                            dialog2.dismiss();
+                                                            btnUnirse.setEnabled(true); // Volver a activar el botón si cancela
+                                                    })
+                                                    .show();
+                                        } else {
+                                            // Si tiene derecho a reembolso, se abandona directamente
+                                            abandonarActividadPago(idActividad, id_user);
+                                        }
                                     }
                                 }
-                            }
-                        } else {
-                            // Si la actividad es gratuita, el usuario puede unirse sin problemas
-                            if (precioActividad == 0) {
-                                unirseActividadGratis(idActividad, id_user);
+                            } else {
+                                // Si la actividad es gratuita, el usuario puede unirse sin problemas
+                                if (precioActividad == 0) {
+                                    unirseActividadGratis(idActividad, id_user);
+                                }
                             }
                         }
                     })
@@ -537,6 +549,7 @@ public class ActivityDetails extends AppCompatActivity implements OnMapReadyCall
                         volverAPantallaInicial();
                     } else {
                         Toast.makeText(ActivityDetails.this, "¡No se ha podido abandonar la actividad!", Toast.LENGTH_SHORT).show();
+                        btnUnirse.setEnabled(true);
                     }
                 } else {
                     Toast.makeText(ActivityDetails.this, "Error al procesar la solicitud.", Toast.LENGTH_SHORT).show();
@@ -564,9 +577,11 @@ public class ActivityDetails extends AppCompatActivity implements OnMapReadyCall
                         volverAPantallaInicial();
                     } else {
                         Toast.makeText(ActivityDetails.this, "¡No se ha podido abandonar la actividad!", Toast.LENGTH_SHORT).show();
+                        btnUnirse.setEnabled(true);
                     }
                 } else {
                     Toast.makeText(ActivityDetails.this, "Error al procesar la solicitud.", Toast.LENGTH_SHORT).show();
+                    btnUnirse.setEnabled(true);
                 }
             }
 
@@ -657,8 +672,8 @@ public class ActivityDetails extends AppCompatActivity implements OnMapReadyCall
                         intent.putExtra("order_id", orderId);
                         intent.putExtra("cantidad", cantidad);
                         intent.putExtra("pago_exitoso", true);
+                        intent.putExtra("usuario", usuario);
                         startActivity(intent);
-                        finish();
                 });
             } catch (Exception e) {
                 runOnUiThread(() -> Toast.makeText(ActivityDetails.this, "Error en la captura del pago", Toast.LENGTH_SHORT).show());
@@ -694,24 +709,30 @@ public class ActivityDetails extends AppCompatActivity implements OnMapReadyCall
     }
 
     private void ajustarBoton(double precio){
-        if (isUsuarioUnido){
-            if (isUsuarioCreador){
-                btnUnirse.setVisibility(View.VISIBLE);
-                btnUnirse.setText("Cancelar Actividad");
-                paymentButtonContainer.setPaypalButtonEnabled(false);
-            }else {
-                btnUnirse.setVisibility(View.VISIBLE);
-                btnUnirse.setText("Abandonar Actividad");
-                paymentButtonContainer.setPaypalButtonEnabled(false);
-            }
-        } else{
-            if (precio != 0){
-                btnUnirse.setVisibility(View.INVISIBLE);
-                paymentButtonContainer.setVisibility(View.VISIBLE);
-                paymentButtonContainer.setPaypalButtonEnabled(true);
-            }else{
-                btnUnirse.setVisibility(View.VISIBLE);
-                paymentButtonContainer.setPaypalButtonEnabled(false);
+        if (is_admin){
+            btnUnirse.setVisibility(View.VISIBLE);
+            btnUnirse.setText("Eliminar actividad");
+            paymentButtonContainer.setPaypalButtonEnabled(false);
+        }else{
+            if (isUsuarioUnido){
+                if (isUsuarioCreador){
+                    btnUnirse.setVisibility(View.VISIBLE);
+                    btnUnirse.setText("Cancelar Actividad");
+                    paymentButtonContainer.setPaypalButtonEnabled(false);
+                }else {
+                    btnUnirse.setVisibility(View.VISIBLE);
+                    btnUnirse.setText("Abandonar Actividad");
+                    paymentButtonContainer.setPaypalButtonEnabled(false);
+                }
+            } else{
+                if (precio != 0){
+                    btnUnirse.setVisibility(View.INVISIBLE);
+                    paymentButtonContainer.setVisibility(View.VISIBLE);
+                    paymentButtonContainer.setPaypalButtonEnabled(true);
+                }else{
+                    btnUnirse.setVisibility(View.VISIBLE);
+                    paymentButtonContainer.setPaypalButtonEnabled(false);
+                }
             }
         }
     }

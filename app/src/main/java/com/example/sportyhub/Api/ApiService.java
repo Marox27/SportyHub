@@ -209,7 +209,7 @@ public interface ApiService {
     @GET("/api/reportes/comprobar-existente")
     Call<Boolean> comprobarReporteExistente(@Query("idUsuario") int idUsuario,
                                             @Query("idEntidad") int idEntidad,
-                                            @Query("Entidad") String entidad);
+                                            @Query("entidad") String entidad);
 
     @PUT("/api/reportes/revisar")
     Call<Boolean>revisarReporte(@Query("idReporte") int idReporte);
@@ -231,6 +231,11 @@ public interface ApiService {
 
     @PUT("/api/notificaciones/marcar-leidas")
     Call<Boolean> marcarNotificacionesLeidas(@Body List<Integer> ids);
+
+    @POST("/api/notificaciones/crear-aviso")
+    Call<Void> crearAviso(@Query("titulo") String titulo,
+                          @Query("cuerpo") String cuerpo,
+                          @Query("idUsuario") int idUsuario);
 
 
 

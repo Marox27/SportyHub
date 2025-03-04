@@ -353,8 +353,10 @@
     <EditText
         android:id="@+id/etDescripcion"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="150dp"
         android:inputType="textMultiLine"
+        android:background="@drawable/layout_border"
+        android:gravity="start|top"
         android:layout_marginHorizontal="24dp"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"

@@ -216,17 +216,17 @@ public class Actividad implements Parcelable {
             case 1:
                 return "Fútbol 7";
             case 2:
-                return "Fútbol";
+                return "Fútbol 11";
             case 3:
-                return "Fútsal";
+                return "Fútbol Sala";
             case 4:
                 return "Tenis";
             case 5:
-                return "Pádel";
+                return "Padel";
             case 6:
                 return "Baloncesto";
             case 7:
-                return "Béisbol";
+                return "Beisbol";
         }
         return null;
     }

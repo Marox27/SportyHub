@@ -7,17 +7,23 @@
     android:orientation="vertical">
 
     <!-- Nombre del equipo -->
-    <TextView
-        android:id="@+id/nombreEquipo"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Nombre del Equipo"
-        android:textSize="22sp"
-        android:textStyle="bold"
+        android:layout_height="?attr/actionBarSize"
         android:background="@color/mainOrange"
-        android:gravity="center"
-        android:padding="16dp"
-        android:paddingBottom="8dp" />
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:title="Detalles del Equipo"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+
+    <ImageView
+        android:id="@+id/logoEquipo"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_marginTop="8dp"
+        android:layout_gravity="center"
+        />
 
     <!-- Descripción del equipo -->
     <TextView

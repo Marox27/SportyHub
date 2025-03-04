@@ -590,7 +590,7 @@ public class CrearActividad extends AppCompatActivity implements OnMapReadyCallb
     private void setupAutoCompleteFragment() {
         // Inicializa la API de Places
         if (!Places.isInitialized()) {
-            Places.initialize(getApplicationContext(), BuildConfig.MAPS_API_KEY);
+            Places.initialize(getApplicationContext(), "AIzaSyAOHR3iIrvHO4VSTL2f5DyP9LxKfndshdI");
         }
 
         // Obtiene una referencia al fragmento de PlaceAutocomplete

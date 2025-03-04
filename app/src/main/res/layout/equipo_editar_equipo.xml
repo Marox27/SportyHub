@@ -39,7 +39,6 @@
 
     <!-- TextView para la ubicación del equipo -->
     <TextView
-        android:id="@+id/textView16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Ubicación"
@@ -69,25 +68,8 @@
             android:layout_marginStart="8dp"/>
     </LinearLayout>
 
-    <!-- TextView para la privacidad del equipo -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:text="Privacidad"
-        android:layout_marginTop="16dp"/>
-
-    <!-- Spinner para seleccionar la privacidad -->
-    <Spinner
-        android:id="@+id/spinnerPrivacidad"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:layout_marginTop="8dp"/>
-
     <!-- TextView para la descripción -->
     <TextView
-        android:id="@+id/textView18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Descripción/Detalles"
@@ -100,16 +82,17 @@
         android:layout_height="121dp"
         android:layout_marginTop="8dp"
         android:inputType="textMultiLine"
+        android:gravity="start|top"
         android:background="@drawable/layout_border"
-        android:gravity="start|top"/>
+        />
 
     <!-- Botón para crear el equipo -->
     <Button
-        android:id="@+id/buttonCrearEquipo"
+        android:id="@+id/buttonGuardarCambios"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:text="Crear Equipo"
+        android:text="Guardar Cambios"
         android:layout_marginTop="16dp"/>
 
 </LinearLayout>

@@ -20,6 +20,13 @@
         android:padding="16dp"
         android:paddingBottom="8dp" />
 
+    <ImageView
+        android:id="@+id/logoEquipo"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_marginTop="8dp"
+        android:layout_gravity="center"
+        />
     <!-- Descripción del equipo -->
     <TextView
         android:id="@+id/descripcionEquipo"

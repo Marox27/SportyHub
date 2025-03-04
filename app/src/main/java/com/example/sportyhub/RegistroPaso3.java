@@ -30,6 +30,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.sportyhub.Actividad.CrearActividad;
+import com.example.sportyhub.Admin.AdminMainActivity;
 import com.example.sportyhub.Api.ApiClient;
 import com.example.sportyhub.Api.ApiService;
 import com.example.sportyhub.Modelos.Provincia;
@@ -69,6 +70,9 @@ public class RegistroPaso3 extends AppCompatActivity {
     private ActivityResultLauncher<Intent> selectImageLauncher;
     private ActivityResultLauncher<Intent> cropImageLauncher;
 
+    private boolean admin;
+    private Usuario usuario;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,6 +91,8 @@ public class RegistroPaso3 extends AppCompatActivity {
         // Recuperar datos del Intent
         userEmail = getIntent().getStringExtra("user_email");
         userPassword = getIntent().getStringExtra("user_pass");
+        admin = getIntent().getBooleanExtra("admin", false);
+        usuario = getIntent().getParcelableExtra("usuario", Usuario.class);
 
         // Cargamos el listado de provincias
         cargarProvincias(citySpinner);
@@ -137,6 +143,11 @@ public class RegistroPaso3 extends AppCompatActivity {
                 String last_name = lastNameInput.getText().toString();
                 String nickname = nicknameInput.getText().toString();
                 String city = citySpinner.getSelectedItem().toString();
+
+                if (admin){
+                    userEmail = nickname + "@sportyhub.com";
+                    userPassword = "#Ab12345";
+                }
 
                 finishButton.setEnabled(false);
 
@@ -244,7 +255,7 @@ public class RegistroPaso3 extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     provincias = response.body();
                     Log.d("API", "Provincias recibidas: " + provincias.size());
-                    ArrayAdapter<Provincia> adapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, provincias);
+                    ArrayAdapter<Provincia> adapter = new ArrayAdapter<>(getApplicationContext(), R.layout.item_spinner, provincias);
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spinner.setAdapter(adapter);
                 }else {
@@ -313,6 +324,7 @@ public class RegistroPaso3 extends AppCompatActivity {
         // Crear un objeto Usuario con los datos finales
         Usuario usuario = new Usuario(name, last_name, nickname, userEmail, userPassword, fecha_nacimiento.toString(), city, imagePath);
         usuario.setActivo(true);
+        if (admin) usuario.setAdmin(true);
         Gson gson = new Gson();
         String jsonUsuario = gson.toJson(usuario);
         Log.d("API", "JSON enviado: " + jsonUsuario);
@@ -324,6 +336,14 @@ public class RegistroPaso3 extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     mostrarSnackbar(findViewById(android.R.id.content), "¡Registro completado!");
                     int id_user = response.body().getIdUsuario().intValue();
+
+                    if (admin){
+                        Toast.makeText(getApplicationContext(),"Usuario administrador creado", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getApplicationContext(), AdminMainActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                        finish();
+                    }else{
 
                     // Creamos los objetos de SharedPreferences para guardar la información
                     SharedPreferences preferences = getSharedPreferences("Credenciales", Context.MODE_PRIVATE);
@@ -340,6 +360,7 @@ public class RegistroPaso3 extends AppCompatActivity {
                     Intent intent = new Intent(getApplicationContext(), Login.class);
                     startActivity(intent);
                     finish();
+                    }
                 } else {
                     Log.e("API", "Error en la respuesta: " + response.code());
                     Toast.makeText(getApplicationContext(),

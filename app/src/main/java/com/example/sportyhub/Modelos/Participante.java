@@ -10,6 +10,7 @@ public class Participante implements Serializable {
     private String pfp;
 
     private Usuario usuario;
+    private Actividad actividad;
 
 
     public Participante(Usuario usuario, int id) {
@@ -53,5 +54,13 @@ public class Participante implements Serializable {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public Actividad getActividad() {
+        return actividad;
+    }
+
+    public void setActividad(Actividad actividad) {
+        this.actividad = actividad;
     }
 }

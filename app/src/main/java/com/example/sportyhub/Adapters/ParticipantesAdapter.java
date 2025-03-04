@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -50,7 +51,7 @@ public class ParticipantesAdapter extends RecyclerView.Adapter<ParticipantesAdap
         Participante participante = listaParticipantes.get(position);
         Log.e("ParticipanteADAPTER", participante.getNickname() + participante.getPfp() + participante.getId());
 
-        holder.textViewNombre.setText(participante.getUsuario().getIdUsuario() == creador.getIdUsuario().intValue() ?
+        holder.textViewNombre.setText(participante.getUsuario().getIdUsuario() == participante.getActividad().getCreador() ?
                 participante.getUsuario().getNickname() + " ⭐(CREADOR)" : participante.getUsuario().getNickname());
 
         // Cargar la imagen desde la URL usando Glide
@@ -74,6 +75,7 @@ public class ParticipantesAdapter extends RecyclerView.Adapter<ParticipantesAdap
                     int idAccion = item.getItemId();
 
                     if (idAccion == R.id.action_reportar_usuario){
+                        if (participanteSeleccionado.getUsuario().getIdUsuario().intValue() != creador.getIdUsuario().intValue()){
                         // Acciones para la opción 1
                         Intent intent = new Intent(v.getContext(), CrearReporte.class);
                         intent.putExtra("usuario", creador);
@@ -82,6 +84,10 @@ public class ParticipantesAdapter extends RecyclerView.Adapter<ParticipantesAdap
                         v.getContext().startActivity(intent);
 
                         return true;
+                        }else{
+                            Toast.makeText(v.getContext(), "No puedes reportarte a tí mismo", Toast.LENGTH_SHORT).show();
+                            return true;
+                        }
                     }else {
                         return false;
                     }

@@ -36,8 +36,8 @@ public class Usuario implements Parcelable {
     @SerializedName("pfp")
     private String pfp;
 
-    @SerializedName("is_admin")
-    private boolean isAdmin;
+    @SerializedName("admin")
+    private boolean admin;
 
     @SerializedName("activo")
     private boolean activo;
@@ -73,7 +73,7 @@ public class Usuario implements Parcelable {
         fecha_nacimiento = in.readString();
         ciudad = in.readString();
         pfp = in.readString();
-        isAdmin = in.readByte() != 0;
+        admin = in.readByte() != 0;
         activo = in.readByte() != 0;
         baneado = in.readByte() != 0;
     }
@@ -95,7 +95,7 @@ public class Usuario implements Parcelable {
         dest.writeString(fecha_nacimiento);
         dest.writeString(ciudad);
         dest.writeString(pfp);
-        dest.writeByte((byte) (isAdmin ? 1 : 0));
+        dest.writeByte((byte) (admin ? 1 : 0));
         dest.writeByte((byte) (activo ? 1 : 0));
         dest.writeByte((byte) (baneado ? 1 : 0));
     }
@@ -199,11 +199,11 @@ public class Usuario implements Parcelable {
     }
 
     public boolean isAdmin() {
-        return isAdmin;
+        return admin;
     }
 
     public void setAdmin(boolean isAdmin) {
-        this.isAdmin = isAdmin;
+        this.admin = isAdmin;
     }
 
     public boolean isActivo() {
@@ -235,7 +235,7 @@ public class Usuario implements Parcelable {
                 ", ciudad='" + ciudad + '\'' +
                 ", fecha nacimiento='" + fecha_nacimiento + '\'' +
                 ", pfp='" + pfp + '\'' +
-                ", isAdmin=" + isAdmin +
+                ", isAdmin=" + admin +
                 ", activo=" + activo +
                 ", baneado=" + baneado +
                 '}';

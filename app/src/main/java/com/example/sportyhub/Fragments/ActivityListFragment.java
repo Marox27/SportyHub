@@ -145,7 +145,7 @@ public class ActivityListFragment extends Fragment {
         inicializarUI(rootView);
         configurarFiltros();
         configurarRecyclerView();
-        cargarActividades();
+        //cargarActividades();
 
         return rootView;
     }
@@ -166,8 +166,8 @@ public class ActivityListFragment extends Fragment {
         chipGroupParticipantes = requireActivity().findViewById(R.id.chipGroupParticipantes);
         chipGroupUbicacion = requireActivity().findViewById(R.id.chipGroupUbicacion);
         chipGroupCoste = requireActivity().findViewById(R.id.chipGroupCoste);
-        sliderDuracion = requireActivity().findViewById(R.id.slider_duracion);
-        txtDuracion = requireActivity().findViewById(R.id.tvDuracion);
+        //sliderDuracion = requireActivity().findViewById(R.id.slider_duracion);
+        //txtDuracion = requireActivity().findViewById(R.id.tvDuracion);
 
 
         spinnerDeporte = requireActivity().findViewById(R.id.spinner_deporte);
@@ -268,16 +268,17 @@ public class ActivityListFragment extends Fragment {
                 }
             });
 
+
             // Configurar Slider de distancia
             sliderDistacia.addOnChangeListener((slider, value, fromUser) -> {
                 filtroDistancia = (int) value;
-                txtDistancia.setText("Distancia máxima (km):\t" + filtroDistancia + ", " + filtroDistancia * 1000 + " (m)");
+                txtDistancia.setText("Distancia máxima " + filtroDistancia + "(km)");
             });
 
-            sliderDuracion.addOnChangeListener((slider, value, fromUser) -> {
+           /* sliderDuracion.addOnChangeListener((slider, value, fromUser) -> {
                 filtroDuracion = (int) value;
                 txtDuracion.setText("Duración (minutos):\t" + value);
-            });
+            });*/
 
             // Configurar selector de fecha
             btnFecha.setOnClickListener(view -> mostrarSelectorFecha());
@@ -326,9 +327,9 @@ public class ActivityListFragment extends Fragment {
         filtroDeporte = "TODOS";
         filtroGratis = false;
         filtroPago = false;
-        filtroCorta = false;
-        filtroMedia = false;
-        filtroLarga = false;
+        //filtroCorta = false;
+        //filtroMedia = false;
+        //filtroLarga = false;
         filtroFecha = "";
 
         etiquetasSeleccionadas.clear();
@@ -339,7 +340,7 @@ public class ActivityListFragment extends Fragment {
 
         actividadAdapter = new ActividadAdapter(listaActividadesOriginal, getContext());
         recyclerView.setAdapter(actividadAdapter); // Restauramos la lista original
-        actualizarMapa();
+        actualizarMapa(listaActividadesOriginal);
         //cargarActividadesDe0();
     }
 
@@ -359,7 +360,6 @@ public class ActivityListFragment extends Fragment {
 
             boolean coincideDeporte = (filtroDeporte.equalsIgnoreCase("TODOS")) ||
                     (filtroDeporte.equalsIgnoreCase(actividad.getDeporteName()));
-
             boolean coincideDistancia = (filtroDistancia == 0) || (calcularDistancia(actividad) <= filtroDistancia);
 
             Log.d("APP_DEBUG", coincideEtiquetas + " " + coincideCosto + " " + coincideFecha + " " +  filtroDeporte +coincideDeporte + " " + coincideDistancia);
@@ -369,13 +369,14 @@ public class ActivityListFragment extends Fragment {
             }
         }
 
+        etiquetasSeleccionadas.clear();
         listaActividadesFiltrada.clear();
         listaActividadesFiltrada.addAll(actividadesFiltradas);
 
-        actividadAdapter = new ActividadAdapter(listaActividadesFiltrada, getContext());
+        actividadAdapter = new ActividadAdapter(actividadesFiltradas, getContext());
         recyclerView.setAdapter(actividadAdapter); // Restauramos la lista original
         //actividadAdapter.updateActividades(new ArrayList<>(listaActividadesFiltrada)); // Pasamos una copia para evitar modificar la lista original
-        actualizarMapa();
+        actualizarMapa(actividadesFiltradas);
     }
 
     private void comprobarEtiquetasSeleccionadas(String filtroIntensidad, String filtroObjetivo,
@@ -437,15 +438,16 @@ public class ActivityListFragment extends Fragment {
         mapView.getMapAsync(googleMap -> {
             if (googleMap != null) {
                 mMap = googleMap;
-                actualizarMapa(); // Llama a tu método para actualizar el mapa
+                actualizarMapa(listaActividadesOriginal); // Llama a tu método para actualizar el mapa
             } else {
                 Log.e("MapError", "No se pudo obtener el GoogleMap.");
             }
         });
     }
 
-    private void actualizarMapa() {
-        mMap.clear();
+    private void actualizarMapa(List<Actividad> actividades) {
+        if (mMap!=null) mMap.clear();
+
         if (latitud != 0 && longitud != 0) {
             LatLng center = new LatLng(latitud, longitud);
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(center, 8)); // Zoom 15 para vista cercana
@@ -464,6 +466,7 @@ public class ActivityListFragment extends Fragment {
                 mapaCirculo.remove();
             }
 
+            if (distancia == 0) distancia = 50;
             // Dibujar nuevo círculo en el mapa
             CircleOptions circleOptions = new CircleOptions()
                     .center(center)
@@ -477,9 +480,9 @@ public class ActivityListFragment extends Fragment {
         }
 
         // Mostrar actividades en el mapa
-        if (listaActividadesFiltrada != null && !listaActividadesFiltrada.isEmpty()) {
+        if (actividades != null && !actividades.isEmpty()) {
             LatLngBounds.Builder builder = new LatLngBounds.Builder();
-            for (Actividad actividad : listaActividadesFiltrada) {
+            for (Actividad actividad : actividades) {
                 LatLng coordenadas = new LatLng(actividad.getLatitud(), actividad.getLongitud());
                 MarkerOptions markerOptions = new MarkerOptions()
                         .position(coordenadas)
@@ -530,7 +533,7 @@ public class ActivityListFragment extends Fragment {
             mapView.getMapAsync(googleMap -> {
                 if (googleMap != null) {
                     mMap = googleMap;
-                    actualizarMapa();
+                    actualizarMapa(listaActividadesOriginal);
                 } else {
                     Log.e("MapError", "No se pudo obtener el GoogleMap.");
                 }

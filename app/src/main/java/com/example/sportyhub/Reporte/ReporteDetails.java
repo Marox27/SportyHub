@@ -20,6 +20,7 @@ import com.bumptech.glide.Glide;
 import com.example.sportyhub.Admin.AdminMainActivity;
 import com.example.sportyhub.Api.ApiClient;
 import com.example.sportyhub.Api.ApiService;
+import com.example.sportyhub.MainActivity;
 import com.example.sportyhub.Modelos.Actividad;
 import com.example.sportyhub.Modelos.Equipo;
 import com.example.sportyhub.Modelos.Reporte;
@@ -248,8 +249,13 @@ public class ReporteDetails extends AppCompatActivity {
             public void onResponse(@NonNull Call<Boolean> call, @NonNull Response<Boolean> response) {
                 if (response.isSuccessful()) {
                     if (response.body()) {
-                        mostrarSnackbar(findViewById(android.R.id.content), "Usuario baneado. El reporte ha sido resuelto.");
+                        Toast.makeText(getApplicationContext(), "Usuario baneado. El reporte ha sido resuelto.", Toast.LENGTH_SHORT).show();
                         cerrarReporte();
+                        Intent intent = new Intent(getApplicationContext(), AdminMainActivity.class);
+                        intent.putExtra("usuario", usuarioAdmin);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                        finish();
                     }
                 } else if (response.code() == 403) {
                     // Si el token no es válido o ha expirado

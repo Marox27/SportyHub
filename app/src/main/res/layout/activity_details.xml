@@ -24,6 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/mainOrange"
+            app:titleTextColor="@color/black"
             app:title="Detalles de la Actividad"
             app:titleTextAppearance="@style/ToolbarTitleStyle"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
@@ -161,6 +162,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
+                    android:textColor="@color/black"
                     android:layout_marginHorizontal="5dp"
                     android:background="@drawable/etiqueta_background"
                     android:text="Etiqueta 1"/>
@@ -171,6 +173,7 @@
                     android:layout_height="wrap_content"
                     android:padding="5dp"
                     android:layout_marginHorizontal="5dp"
+                    android:textColor="@color/black"
                     android:background="@drawable/etiqueta_background"
                     android:text="Etiqueta 2"/>
 
@@ -180,6 +183,7 @@
                     android:layout_height="wrap_content"
                     android:padding="5dp"
                     android:layout_marginHorizontal="5dp"
+                    android:textColor="@color/black"
                     android:background="@drawable/etiqueta_background"
                     android:text="Etiqueta 3"/>
 
@@ -189,6 +193,7 @@
                     android:layout_height="wrap_content"
                     android:padding="5dp"
                     android:layout_marginHorizontal="5dp"
+                    android:textColor="@color/black"
                     android:background="@drawable/etiqueta_background"
                     android:text="Etiqueta 4"/>
             </LinearLayout>

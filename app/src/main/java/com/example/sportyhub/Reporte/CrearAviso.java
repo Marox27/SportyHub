@@ -41,8 +41,6 @@ public class CrearAviso extends AppCompatActivity {
         usuarioActual = getIntent().getParcelableExtra("usuario_admin", Usuario.class);
         reporte = getIntent().getParcelableExtra("reporte", Reporte.class);
 
-        Log.d("APP_DEBUG", usuarioDestinatario.toString() + " " + usuarioActual.toString());
-
         etTitulo = findViewById(R.id.etTitulo);
         etMensaje = findViewById(R.id.etMensaje);
         btnEnviar = findViewById(R.id.btnEnviar);
@@ -50,20 +48,24 @@ public class CrearAviso extends AppCompatActivity {
         btnEnviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                enviarNotificacion();
+                String titulo = etTitulo.getText().toString().trim();
+                String mensaje = etMensaje.getText().toString().trim();
+
+                if (titulo.isEmpty() || mensaje.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show();
+                    return;
+                }else{
+                    if (usuarioDestinatario !=null) {
+                        enviarNotificacion(titulo, mensaje);
+                    }else{
+                        crearAviso(titulo, mensaje, usuarioActual.getIdUsuario().intValue());
+                    }
+                }
             }
         });
     }
 
-    private void enviarNotificacion() {
-        String titulo = etTitulo.getText().toString().trim();
-        String mensaje = etMensaje.getText().toString().trim();
-
-        if (titulo.isEmpty() || mensaje.isEmpty()) {
-            Toast.makeText(this, "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
+    private void enviarNotificacion(String titulo, String mensaje) {
         Notificacion notificacion = new Notificacion(usuarioActual, usuarioDestinatario, titulo, mensaje);
 
         ApiService apiService = ApiClient.getApiService(this);
@@ -92,6 +94,30 @@ public class CrearAviso extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Call<Notificacion> call, @NonNull Throwable t) {
                 Log.e("API", "Error al enviar el aviso al usuario: " + t.getMessage());
+            }
+        });
+    }
+
+    private void crearAviso(String titulo, String cuerpo, int idUsuario) {
+        ApiService apiService = ApiClient.getApiService(this);
+        Call<Void> call = apiService.crearAviso(titulo, cuerpo, idUsuario);
+
+        call.enqueue(new Callback<>() {
+            @Override
+            public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
+                if (response.isSuccessful()) {
+                        Toast.makeText(getApplicationContext(), "Aviso creado y enviado a los usuario.", Toast.LENGTH_SHORT).show();
+                        finish();
+                } else if (response.code() == 403) {
+                    // Si el token no es válido o ha expirado
+                    Log.e("API", "Token inválido o expirado");
+                } else {
+                    Log.e("API", "Error en la respuesta: " + response.code());
+                }
+            }
+            @Override
+            public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
+                Log.e("API", "Error al crear el aviso: " + t.getMessage());
             }
         });
     }

@@ -51,6 +51,9 @@
             android:name=".Equipo.CrearEquipo"
             android:exported="false" />
         <activity
+            android:name=".Equipo.EditarEquipo"
+            android:exported="false" />
+        <activity
             android:name=".Equipo.EquipoDetails"
             android:exported="false" />
         <activity

@@ -213,9 +213,7 @@ public class MainActivity extends AppCompatActivity implements ActivityUserListF
             // Configurar clics en las opciones del menú
             navigationView.setNavigationItemSelectedListener(item -> {
                 int itemId = item.getItemId();
-                if (itemId == R.id.nav_home){
-                    Toast.makeText(this, "Inicio", Toast.LENGTH_SHORT).show();
-                }else if(itemId == R.id.nav_deportes){
+                if(itemId == R.id.nav_deportes){
                     Intent intent = new Intent(getApplicationContext(), DeportesActivity.class);
                     startActivity(intent);
                 } else if (itemId == R.id.nav_notifications) {

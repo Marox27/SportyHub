@@ -14,14 +14,16 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import com.example.sportyhub.Login;
+import com.example.sportyhub.Modelos.Usuario;
 import com.example.sportyhub.R;
 import com.example.sportyhub.RegistroPaso3;
 import com.example.sportyhub.Reporte.CrearAviso;
 
 public class AdminOtherFragment extends Fragment {
+    Usuario usuario_admin;
 
-    public AdminOtherFragment() {
-
+    public AdminOtherFragment(Usuario usuario) {
+        this.usuario_admin = usuario;
     }
 
     @Override
@@ -34,13 +36,14 @@ public class AdminOtherFragment extends Fragment {
 
         cardOpcion1.setOnClickListener(v -> {
            Intent intent = new Intent(getContext(), RegistroPaso3.class);
-           intent.putExtra("administrador", true);
+           intent.putExtra("admin", true);
+           intent.putExtra("usuario", usuario_admin);
            startActivity(intent);
         });
 
-        cardOpcion1.setOnClickListener(v -> {
+        cardOpcion2.setOnClickListener(v -> {
             Intent intent = new Intent(getContext(), CrearAviso.class);
-            intent.putExtra("administrador", true);
+            intent.putExtra("usuario_admin", usuario_admin);
             startActivity(intent);
         });
 
